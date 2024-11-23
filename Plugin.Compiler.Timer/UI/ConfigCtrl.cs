@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using Plugin.CompilerTimer.Runtime;
-using Plugin.CompilerTimer.Settings;
+using Plugin.Compiler.Timer.Runtime;
+using Plugin.Compiler.Timer.Settings;
 
-namespace Plugin.CompilerTimer.UI
+namespace Plugin.Compiler.Timer.UI
 {
 	public partial class ConfigCtrl : UserControl
 	{

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Threading;
-using Plugin.CompilerTimer.Facade;
-using Plugin.CompilerTimer.Runtime;
-using Plugin.CompilerTimer.UI;
+using Plugin.Compiler.Timer.Facade;
+using Plugin.Compiler.Timer.Runtime;
+using Plugin.Compiler.Timer.UI;
 using SAL.Flatbed;
 
-namespace Plugin.CompilerTimer
+namespace Plugin.Compiler.Timer
 {
 	public class Plugin : IPlugin, IPluginSettings<PluginSettings>
 	{

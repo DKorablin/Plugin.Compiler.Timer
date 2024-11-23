@@ -1,9 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing.Design;
-using Plugin.CompilerTimer.UI;
+using Plugin.Compiler.Timer.UI;
 
-namespace Plugin.CompilerTimer.Settings
+namespace Plugin.Compiler.Timer.Settings
 {
 	/// <summary>Настройки маппинга таймера и выполняемого кода</summary>
 	public class TimerCompilerSettingsItem

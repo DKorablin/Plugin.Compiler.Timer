@@ -1,7 +1,7 @@
 ﻿using System;
 using SAL.Flatbed;
 
-namespace Plugin.CompilerTimer.Facade
+namespace Plugin.Compiler.Timer.Facade
 {
 	/// <summary>Обёртка над плагином с таймерами</summary>
 	internal class TimersPlugin

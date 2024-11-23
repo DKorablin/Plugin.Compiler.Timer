@@ -1,7 +1,7 @@
 ﻿using System;
-using Plugin.CompilerTimer.Settings;
+using Plugin.Compiler.Timer.Settings;
 
-namespace Plugin.CompilerTimer.Runtime
+namespace Plugin.Compiler.Timer.Runtime
 {
 	public class RuntimeItem
 	{

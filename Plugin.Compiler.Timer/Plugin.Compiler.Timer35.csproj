@@ -10,8 +10,8 @@
     <ProjectGuid>{024B1D58-5AEE-4CFB-8A64-A77CBFD15413}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Plugin.CompilerTimer</RootNamespace>
-    <AssemblyName>Plugin.CompilerTimer</AssemblyName>
+    <RootNamespace>Plugin.Compiler.Timer</RootNamespace>
+    <AssemblyName>Plugin.Compiler.Timer</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">

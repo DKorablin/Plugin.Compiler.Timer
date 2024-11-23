@@ -1,9 +1,9 @@
 ﻿using System;
-using Plugin.CompilerTimer.Runtime;
+using Plugin.Compiler.Timer.Runtime;
 using SAL.Flatbed;
 using SAL.Windows;
 
-namespace Plugin.CompilerTimer.Facade
+namespace Plugin.Compiler.Timer.Facade
 {
 	/// <summary>Обёртка над плагином компилятором</summary>
 	internal class CompilerPlugin

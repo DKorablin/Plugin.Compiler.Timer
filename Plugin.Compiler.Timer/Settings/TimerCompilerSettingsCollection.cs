@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Plugin.CompilerTimer.Settings
+namespace Plugin.Compiler.Timer.Settings
 {
 	/// <summary>Хранилище настроек таймеров</summary>
 	internal class TimerCompilerSettingsCollection : IEnumerable<TimerCompilerSettingsItem>

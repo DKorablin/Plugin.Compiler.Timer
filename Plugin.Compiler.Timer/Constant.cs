@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Plugin.CompilerTimer
+namespace Plugin.Compiler.Timer
 {
 	internal static class Constant
 	{

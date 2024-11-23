@@ -1,4 +1,4 @@
-﻿namespace Plugin.CompilerTimer.UI
+﻿namespace Plugin.Compiler.Timer.UI
 {
 	partial class ConfigCtrl
 	{

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.Script.Serialization;
 
-namespace Plugin.CompilerTimer
+namespace Plugin.Compiler.Timer
 {
 	/// <summary>Сериализация</summary>
 	internal static class Serializers

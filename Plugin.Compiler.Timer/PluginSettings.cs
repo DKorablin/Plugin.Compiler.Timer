@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Text;
-using Plugin.CompilerTimer.Settings;
+using Plugin.Compiler.Timer.Settings;
 
-namespace Plugin.CompilerTimer
+namespace Plugin.Compiler.Timer
 {
 	public class PluginSettings
 	{

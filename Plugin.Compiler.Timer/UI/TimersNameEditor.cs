@@ -4,9 +4,9 @@ using System.ComponentModel;
 using System.Drawing.Design;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
-using Plugin.CompilerTimer.Settings;
+using Plugin.Compiler.Timer.Settings;
 
-namespace Plugin.CompilerTimer.UI
+namespace Plugin.Compiler.Timer.UI
 {
 	public class TimersNameEditor : UITypeEditor
 	{

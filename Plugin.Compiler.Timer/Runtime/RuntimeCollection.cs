@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Plugin.CompilerTimer.Settings;
+using Plugin.Compiler.Timer.Settings;
 
-namespace Plugin.CompilerTimer.Runtime
+namespace Plugin.Compiler.Timer.Runtime
 {
 	/// <summary>Коллекция запущенных модулей</summary>
 	internal class RuntimeCollection : IEnumerable<RuntimeItem>
