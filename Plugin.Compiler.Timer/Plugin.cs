@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading;
 using Plugin.Compiler.Timer.Facade;
 using Plugin.Compiler.Timer.Runtime;
@@ -9,7 +10,10 @@ namespace Plugin.Compiler.Timer
 {
 	public class Plugin : IPlugin, IPluginSettings<PluginSettings>
 	{
+		private TraceSource _trace;
 		private PluginSettings _settings;
+
+		private TraceSource Trace => this._trace ?? (this._trace = Plugin.CreateTraceSource<Plugin>());
 
 		internal IHost Host { get; }
 
@@ -70,9 +74,24 @@ namespace Plugin.Compiler.Timer
 		{
 			Plugin plugin = (Plugin)state;
 
-			foreach(var settingsItem in plugin.Settings.Data)
-				if(settingsItem.IsAutoStart)
-					plugin.Runtime.Start(settingsItem);
+			try
+			{
+				foreach(var settingsItem in plugin.Settings.Data)
+					if(settingsItem.IsAutoStart)
+						plugin.Runtime.Start(settingsItem);
+			}catch(Exception exc)
+			{
+				plugin.Trace.TraceData(TraceEventType.Error, 10, exc);
+			}
+		}
+
+		private static TraceSource CreateTraceSource<T>(String name = null) where T : IPlugin
+		{
+			TraceSource result = new TraceSource(typeof(T).Assembly.GetName().Name + name);
+			result.Switch.Level = SourceLevels.All;
+			result.Listeners.Remove("Default");
+			result.Listeners.AddRange(System.Diagnostics.Trace.Listeners);
+			return result;
 		}
 	}
 }
