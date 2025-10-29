@@ -13,7 +13,6 @@ namespace Plugin.Compiler.Timer
 		internal TimerCompilerSettingsCollection Data
 		{
 			get => this._data ?? (this._data = this.GetSettings());
-			private set => this._data = value;
 		}
 
 		internal PluginSettings(Plugin plugin)

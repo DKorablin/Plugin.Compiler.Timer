@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing.Design;
 using System.Windows.Forms;
@@ -12,7 +11,7 @@ namespace Plugin.Compiler.Timer.UI
 	{
 		private IWindowsFormsEditorService _editorService;
 
-		public IEnumerable<String> GetValues(ITypeDescriptorContext context)
+		private static String[] GetValues(ITypeDescriptorContext context)
 		{
 			TimerCompilerSettingsItem item = (TimerCompilerSettingsItem)context.Instance;
 			TimerCompilerSettingsCollection collection = item.GetOwner();
@@ -20,7 +19,7 @@ namespace Plugin.Compiler.Timer.UI
 		}
 
 		public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext context)
-			=> UITypeEditorEditStyle.DropDown; //base.GetEditStyle(context);
+			=> UITypeEditorEditStyle.DropDown;
 
 		public override Object EditValue(ITypeDescriptorContext context, IServiceProvider provider, Object value)
 		{
@@ -33,10 +32,11 @@ namespace Plugin.Compiler.Timer.UI
 				DisplayMember = "Key",
 				ValueMember = "Value"
 			};
-			lb.SelectedValueChanged += OnListBoxSelectedValueChanged;
+			// close the drop down as soon as something is clicked
+			lb.SelectedValueChanged += (sender, e) => this._editorService.CloseDropDown();
 
 			//context.Instance
-			foreach(String item in this.GetValues(context))
+			foreach(String item in GetValues(context))
 			{
 				Int32 index = lb.Items.Add(item);
 				if(item.Equals(value))
@@ -49,8 +49,5 @@ namespace Plugin.Compiler.Timer.UI
 				? value // no selection, return the passed-in value as is
 				: (String)lb.SelectedItem;
 		}
-
-		private void OnListBoxSelectedValueChanged(Object sender, EventArgs e)// close the drop down as soon as something is clicked
-			=> this._editorService.CloseDropDown();
 	}
 }

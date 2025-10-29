@@ -4,7 +4,7 @@ using Plugin.Compiler.Timer.Settings;
 
 namespace Plugin.Compiler.Timer.Runtime
 {
-	/// <summary>Коллекция запущенных модулей</summary>
+	/// <summary>Collection of running modules</summary>
 	internal class RuntimeCollection : IEnumerable<RuntimeItem>
 	{
 		private readonly Object _lock = new Object();
@@ -12,13 +12,13 @@ namespace Plugin.Compiler.Timer.Runtime
 
 		public Plugin Plugin { get; }
 
-		/// <summary>Коллекция с запущенными таймерами</summary>
-		/// <param name="plugin">Плагин</param>
+		/// <summary>Collection with running timers</summary>
+		/// <param name="plugin">Plugin</param>
 		internal RuntimeCollection(Plugin plugin)
 			=> this.Plugin = plugin;
 
-		/// <summary>Запустить таймер из настроек</summary>
-		/// <param name="settingsItem">Настройки из которых запустить таймер</param>
+		/// <summary>Start timer from settings</summary>
+		/// <param name="settingsItem">Settings from which to start the timer</param>
 		public void Start(TimerCompilerSettingsItem settingsItem)
 		{
 			if(this.Plugin.Timers.PluginInstance == null)
@@ -38,32 +38,32 @@ namespace Plugin.Compiler.Timer.Runtime
 			{
 				RuntimeItem startedItem = this.Find(settingsItem);
 				if(startedItem != null)
-					this.Stop(settingsItem);//Останавливаю таймер, если он уже был запущен
+					this.Stop(settingsItem);//I stop the timer if it was already running.
 
 				RuntimeItem item = new RuntimeItem(this, settingsItem);
 				this._timerData.Add(item);
 			}
 		}
 
-		/// <summary>Поиск запущенного таймера через настройки</summary>
-		/// <param name="settingsItem">Элемент настроек</param>
-		/// <returns>Найденный элемент запущенного таймера</returns>
+		/// <summary>Finding a running timer via settings</summary>
+		/// <param name="settingsItem">Settings item</param>
+		/// <returns>The found running timer item</returns>
 		public RuntimeItem Find(TimerCompilerSettingsItem settingsItem)
 		{
 			foreach(RuntimeItem item in this)
 				if(item.TimerKey == settingsItem.TimerKey
-					|| item.SettingsTimerKey == settingsItem.TimerKey)//Если ключ изменился, то ищем по запущенному ключу
+					|| item.SettingsTimerKey == settingsItem.TimerKey)//If the key has changed, then we search by the running key
 					return item;
 
 			return null;
 		}
 
-		/// <summary>Остановить и удалить таймер</summary>
-		/// <param name="settingsItem">Настройки под которыми был запущен таймер</param>
+		/// <summary>Stop and delete the timer</summary>
+		/// <param name="settingsItem">Settings under which the timer was started</param>
 		public void Stop(TimerCompilerSettingsItem settingsItem)
 		{
 			RuntimeItem item = this.Find(settingsItem)
-				?? throw new ArgumentException(nameof(settingsItem), "Settings item to stop is not found");
+				?? throw new ArgumentException("Settings item to stop is not found", nameof(settingsItem));
 
 			lock(this._lock)
 			{
@@ -72,7 +72,7 @@ namespace Plugin.Compiler.Timer.Runtime
 			}
 		}
 
-		/// <summary>Оставносить все запущенные таймеры</summary>
+		/// <summary>Stop all running timers</summary>
 		public void StopAll()
 		{
 			lock(this._lock)

@@ -5,7 +5,7 @@ using Plugin.Compiler.Timer.UI;
 
 namespace Plugin.Compiler.Timer.Settings
 {
-	/// <summary>Настройки маппинга таймера и выполняемого кода</summary>
+	/// <summary>Timer and Executable Code Mapping Settings</summary>
 	public class TimerCompilerSettingsItem
 	{
 		private String _timerName;
@@ -27,7 +27,7 @@ namespace Plugin.Compiler.Timer.Settings
 		[Description("The timer key is used when registering a timer in a timer plugin.")]
 		public String TimerKey => this.TimerName + "|" + this.MethodName;
 
-		/// <summary>Наименование таймера к которому происходит привязка</summary>
+		/// <summary>The name of the timer to which the binding occurs</summary>
 		[Editor(typeof(TimersNameEditor), typeof(UITypeEditor))]
 		[DisplayName("Timer Name")]
 		[Description("Name of the running timer that is executed during execution")]
@@ -38,7 +38,7 @@ namespace Plugin.Compiler.Timer.Settings
 			set => this._timerName = FixName(value);
 		}
 
-		/// <summary>Наименование исполняемого метода компиляции</summary>
+		/// <summary>Name of the executable compilation method</summary>
 		[Editor(typeof(CompilerMethodEditor), typeof(UITypeEditor))]
 		[DisplayName("Method Name")]
 		[Description("Name of the method called at runtime")]
@@ -49,7 +49,7 @@ namespace Plugin.Compiler.Timer.Settings
 			set => this._methodName = FixName(value);
 		}
 
-		/// <summary>Описание маппинга</summary>
+		/// <summary>Mapping description</summary>
 		[Description("Description of the algorithm being executed")]
 		[DefaultValue("")]
 		public String Description
@@ -75,10 +75,9 @@ namespace Plugin.Compiler.Timer.Settings
 			get => this._isAutoStart;
 			set
 			{
-				if(this._owner == null)//При загрузки из JSON'а owner ещё не проставлен
-					this._isAutoStart = value;
-				else
-					this._isAutoStart = value && this.IsMethodExists && this.IsTimerExists;
+				this._isAutoStart = this._owner == null//When loading from JSON, the owner is not yet set.
+					? value
+					: value && this.IsMethodExists && this.IsTimerExists;
 			}
 		}
 

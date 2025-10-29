@@ -1,31 +1,61 @@
-﻿using System;
+﻿#if NETFRAMEWORK
 using System.Web.Script.Serialization;
+#else
+using System.Text.Json;
+using System.Text.Json.Serialization;
+#endif
+using System;
 
 namespace Plugin.Compiler.Timer
 {
-	/// <summary>Сериализация</summary>
+	/// <summary>Serialization</summary>
 	internal static class Serializers
 	{
+#if NETFRAMEWORK
 		private static JavaScriptSerializer _serializer;
 
-		private static JavaScriptSerializer Serializer//_serializer.RegisterConverters(new JavaScriptConverter[] { new TimeSpanJsonConverter(), new WorkHoursJsonConverter(), });
+		private static JavaScriptSerializer Serializer
 			=> _serializer ?? (_serializer = new JavaScriptSerializer());
+#else
+		private static readonly JsonSerializerOptions _serializerOptions = new JsonSerializerOptions
+		{
+			ReadCommentHandling = JsonCommentHandling.Skip,
+			AllowTrailingCommas = true,
+			PropertyNameCaseInsensitive = true,
+			WriteIndented = false,
+			DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+		};
+#endif
 
-		/// <summary>Десериализовать строку в объект</summary>
-		/// <typeparam name="T">Тип объекта</typeparam>
-		/// <param name="json">Строка в формате JSON</param>
-		/// <returns>Десериализованный объект</returns>
+		/// <summary>Deserialize a string into an object</summary>
+		/// <typeparam name="T">Object type</typeparam>
+		/// <param name="json">String in JSON format</param>
+		/// <returns>Deserialized object</returns>
 		internal static T JavaScriptDeserialize<T>(String json)
-			=> String.IsNullOrEmpty(json)
-				? default
-				: Serializers.Serializer.Deserialize<T>(json);
+		{
+			if(String.IsNullOrEmpty(json))
+				return default;
 
-		/// <summary>Сериализовать объект</summary>
-		/// <param name="item">Объект для сериализации</param>
-		/// <returns>Строка в формате JSON</returns>
+#if NETFRAMEWORK
+			return Serializer.Deserialize<T>(json);
+#else
+			return JsonSerializer.Deserialize<T>(json, _serializerOptions);
+#endif
+		}
+
+		/// <summary>Serialize object</summary>
+		/// <param name="item">Object to serialize</param>
+		/// <returns>String in JSON format</returns>
 		internal static String JavaScriptSerialize(Object item)
-			=> item == null
-				? null
-				: Serializers.Serializer.Serialize(item);
+		{
+			if(item == null)
+				return null;
+
+#if NETFRAMEWORK
+			return Serializer.Serialize(item);
+#else
+			return JsonSerializer.Serialize(item, _serializerOptions);
+#endif
+		}
 	}
 }

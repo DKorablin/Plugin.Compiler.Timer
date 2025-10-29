@@ -14,13 +14,13 @@ namespace Plugin.Compiler.Timer.UI
 
 		private TimerCompilerSettingsItem SelectedItem => lvTimers.SelectedItems.Count == 0 ? null : (TimerCompilerSettingsItem)lvTimers.SelectedItems[0].Tag;
 
-		private String[] EmptySubItems => Array.ConvertAll<String, String>(new String[lvTimers.Columns.Count], delegate(String a) { return String.Empty; });
+		private String[] EmptySubItems => Array.ConvertAll<String, String>(new String[lvTimers.Columns.Count], a => String.Empty);
 
 		public ConfigCtrl(Plugin plugin)
 		{
 			this._plugin = plugin;
 
-			InitializeComponent();
+			this.InitializeComponent();
 			tsbnAdd.Enabled = tsbnRemove.Visible = tsbnExecute.Visible = this._plugin.Compiler.PluginInstance != null && this._plugin.Timers.PluginInstance != null;
 			if(!tsbnAdd.Enabled)
 			{
@@ -56,12 +56,8 @@ namespace Plugin.Compiler.Timer.UI
 		{
 			TimerCompilerSettingsItem settingsItem = (TimerCompilerSettingsItem)listItem.Tag;
 
-			listItem.SubItems[colTimer.Index].Text = settingsItem.TimerName == null
-				? Constant.NullText
-				: settingsItem.TimerName;
-			listItem.SubItems[colMethod.Index].Text = settingsItem.MethodName == null
-				? Constant.NullText
-				: settingsItem.MethodName;
+			listItem.SubItems[colTimer.Index].Text = settingsItem.TimerName ?? Constant.NullText;
+			listItem.SubItems[colMethod.Index].Text = settingsItem.MethodName ?? Constant.NullText;
 
 			if(settingsItem.TimerName == null || settingsItem.MethodName == null)
 				listItem.ForeColor = Color.Gray;
@@ -82,9 +78,6 @@ namespace Plugin.Compiler.Timer.UI
 				itemsToAdd.Add(this.CreateListItem(item, subItems));
 			lvTimers.Items.AddRange(itemsToAdd.ToArray());
 
-			/*ColumnHeaderAutoResizeStyle headerAutoResize = itemsToAdd.Count == 0
-				? ColumnHeaderAutoResizeStyle.HeaderSize
-				: ColumnHeaderAutoResizeStyle.ColumnContent;*/
 			lvTimers.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
 		}
 
@@ -102,7 +95,7 @@ namespace Plugin.Compiler.Timer.UI
 			TimerCompilerSettingsItem item = this.SelectedItem;
 			if(item != null)
 			{
-				String message = String.Format("Are you shure you want to remove mapping between timer {0} and method {1}? Method usage count {2:N0}",
+				String message = String.Format("Are you sure you want to remove mapping between timer {0} and method {1}? Method usage count {2:N0}",
 					item.TimerName,
 					item.MethodName,
 					this._plugin.Settings.Data.GetMethodUsageCount(item));

@@ -23,10 +23,10 @@ namespace Plugin.Compiler.Timer
 
 		internal RuntimeCollection Runtime { get; private set; }
 
-		/// <summary>Настройки для взаимодействия из хоста</summary>
+		/// <summary>Settings for interaction from the host</summary>
 		Object IPluginSettings.Settings => this.Settings;
 
-		/// <summary>Настройки для взаимодействия из плагина</summary>
+		/// <summary>Settings for interaction from the plugin</summary>
 		public PluginSettings Settings
 		{
 			get
@@ -43,14 +43,14 @@ namespace Plugin.Compiler.Timer
 		public Plugin(IHost host)
 			=> this.Host = host ?? throw new ArgumentNullException(nameof(host));
 
-		/// <summary>Получить расширенные настройки с кастомным UI</summary>
+		/// <summary>Get advanced settings with a custom UI</summary>
 		/// <returns></returns>
 		public Object GetPluginOptionsControl()
 			=> new ConfigCtrl(this);
 
 		Boolean IPlugin.OnConnection(ConnectMode mode)
 		{
-			this.Host.Plugins.PluginsLoaded += Host_PluginsLoaded;
+			this.Host.Plugins.PluginsLoaded += this.Host_PluginsLoaded;
 			return true;
 		}
 
