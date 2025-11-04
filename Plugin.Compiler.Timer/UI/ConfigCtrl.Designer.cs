@@ -62,7 +62,7 @@
 			// tsbnAdd
 			// 
 			this.tsbnAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.tsbnAdd.Image = global::Plugin.CompilerTimer.Properties.Resources.FileNew;
+			this.tsbnAdd.Image = global::Plugin.Compiler.Timer.Properties.Resources.FileNew;
 			this.tsbnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.tsbnAdd.Name = "tsbnAdd";
 			this.tsbnAdd.Size = new System.Drawing.Size(24, 24);
@@ -73,7 +73,7 @@
 			// 
 			this.tsbnRemove.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
 			this.tsbnRemove.Enabled = false;
-			this.tsbnRemove.Image = global::Plugin.CompilerTimer.Properties.Resources.iconDelete;
+			this.tsbnRemove.Image = global::Plugin.Compiler.Timer.Properties.Resources.iconDelete;
 			this.tsbnRemove.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.tsbnRemove.Name = "tsbnRemove";
 			this.tsbnRemove.Size = new System.Drawing.Size(24, 24);
@@ -89,7 +89,7 @@
 			// 
 			this.tsbnExecute.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
 			this.tsbnExecute.Enabled = false;
-			this.tsbnExecute.Image = global::Plugin.CompilerTimer.Properties.Resources.iconDebug;
+			this.tsbnExecute.Image = global::Plugin.Compiler.Timer.Properties.Resources.iconDebug;
 			this.tsbnExecute.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.tsbnExecute.Name = "tsbnExecute";
 			this.tsbnExecute.Size = new System.Drawing.Size(24, 24);
