@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFrameworks>net35;net8.0-windows</TargetFrameworks>
+		<TargetFrameworks>net48;net8.0-windows</TargetFrameworks>
 		<UseWindowsForms>true</UseWindowsForms>
 		<EnableWindowsTargeting>true</EnableWindowsTargeting>
 		<OutputType>Library</OutputType>
@@ -55,7 +55,7 @@
 		</AssemblyAttributes>
 	</ItemGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)'=='net35'">
+	<ItemGroup Condition="'$(TargetFramework)'=='net48'">
 		<Reference Include="System.Web.Extensions" />
 	</ItemGroup>
 

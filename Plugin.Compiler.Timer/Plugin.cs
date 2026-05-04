@@ -10,10 +10,9 @@ namespace Plugin.Compiler.Timer
 {
 	public class Plugin : IPlugin, IPluginSettings<PluginSettings>
 	{
-		private TraceSource _trace;
 		private PluginSettings _settings;
 
-		private TraceSource Trace => this._trace ?? (this._trace = Plugin.CreateTraceSource<Plugin>());
+		private ITraceSource Trace { get; }
 
 		internal IHost Host { get; }
 
@@ -40,8 +39,11 @@ namespace Plugin.Compiler.Timer
 			}
 		}
 
-		public Plugin(IHost host)
-			=> this.Host = host ?? throw new ArgumentNullException(nameof(host));
+		public Plugin(IHost host, ITraceSource trace)
+		{
+			this.Host = host ?? throw new ArgumentNullException(nameof(host));
+			this.Trace = trace ?? throw new ArgumentNullException(nameof(trace));
+		}
 
 		/// <summary>Get advanced settings with a custom UI</summary>
 		/// <returns></returns>
@@ -83,15 +85,6 @@ namespace Plugin.Compiler.Timer
 			{
 				plugin.Trace.TraceData(TraceEventType.Error, 10, exc);
 			}
-		}
-
-		private static TraceSource CreateTraceSource<T>(String name = null) where T : IPlugin
-		{
-			TraceSource result = new TraceSource(typeof(T).Assembly.GetName().Name + name);
-			result.Switch.Level = SourceLevels.All;
-			result.Listeners.Remove("Default");
-			result.Listeners.AddRange(System.Diagnostics.Trace.Listeners);
-			return result;
 		}
 	}
 }
